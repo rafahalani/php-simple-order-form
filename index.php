@@ -1,7 +1,13 @@
 <?php
+
+
 //this line makes PHP behave in a more strict way
 declare(strict_types=1);
 //we are going to use session variables so we need to enable sessions
+
+ini_set("display_errors", 1);
+ini_set("display_startup_errors", 1);
+error_reporting(E_ALL);
 session_start();
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';
