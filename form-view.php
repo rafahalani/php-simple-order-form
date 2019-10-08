@@ -10,6 +10,31 @@
     <title>Order food & drinks</title>
 </head>
 <body>
+<?php
+$errors = checkRequired($_POST);
+errorPrint($errors);
+if (!empty($_POST["products"])) {
+    $new_sum = array_sum($_POST["products"]);
+} else {
+    $new_sum = 0;
+}
+if (empty($errors)){
+    $cookie_name = "total";
+    $baseValue = 0;
+    if (isset($_COOKIE[$cookie_name])) {
+        $cookie_value = $_COOKIE[$cookie_name];
+    } else {
+        $cookie_value = 0;
+    }
+    $cookie_value += $baseValue + $new_sum;
+    setcookie($cookie_name, (string)$cookie_value);
+    if (isset($_COOKIE[$cookie_name])) {
+        $totalValue = $_COOKIE[$cookie_name];
+    } else {
+        $totalValue = 0;
+    }
+}
+?>
 <div class="container">
     <h1>Order food in restaurant "the Personal Ham Processors"</h1>
     <nav>
