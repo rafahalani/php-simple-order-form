@@ -11,7 +11,7 @@
 </head>
 <body>
 <?php
-$errors = checkRequired($_POST); //first  take all the errors after validate the inputs
+$errors =checkValidation($_POST); //first  take all the errors after validate the inputs
 errorPrint($errors); // apply error function on the errors
 if (!empty($_POST["products"])) {
     $new_sum = array_sum($_POST["products"]); //add the value of the products (sum)
@@ -26,7 +26,7 @@ if (empty($errors)) { //if there is no errors then you can count
     } else {
         $cookie_value = 0;
     }
-    $cookie_value += $baseValue + $new_sum;
+    $cookie_value += $baseValue + $new_sum;//adding the new sum (bug)
     setcookie($cookie_name, (string)$cookie_value);
     if (isset($_COOKIE[$cookie_name])) {
         $totalValue = $_COOKIE[$cookie_name];

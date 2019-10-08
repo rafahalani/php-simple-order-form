@@ -36,13 +36,15 @@ function errorPrint($errors)
 {
     if (!empty($errors)) {
         foreach ($errors as $error) {
-            echo '<div class="alert alert-danger" role="alert">' . $error . '</div>';
+            echo '<div class="alert alert-danger" role="alert">' . $error . '</div>'; // returns value of the error from the  function
         }
     } elseif (!empty($_POST)) {
-        echo '<div class="alert alert-success" role="alert">Order Sent!</div>';
+        echo '<div class="alert alert-success" role="alert">Your order is Sent!</div>'; // if there is no error print this
     }
 }
-function checkRequired(array $post): array
+
+
+function checkValidation(array $post): array
 {
     $errors = [];
     if (empty($_POST)) {
@@ -53,7 +55,7 @@ function checkRequired(array $post): array
         } else {
             // check if e-mail address is well-formed
             if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Invalid email format";
+                $errors[] = "Invalid email";
             }
         }
         if (empty($post["street"])) {
