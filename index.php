@@ -5,9 +5,6 @@
 declare(strict_types=1);
 //we are going to use session variables so we need to enable sessions
 
-ini_set("display_errors", 1);
-ini_set("display_startup_errors", 1);
-error_reporting(E_ALL);
 session_start();
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';
@@ -33,5 +30,82 @@ $products = [
     ['name' => 'Sprite', 'price' => 2],
     ['name' => 'Ice-tea', 'price' => 3],
 ];
+
+
+function errorPrint($errors)
+{
+    if (!empty($errors)) {
+        foreach ($errors as $error) {
+            echo '<div class="alert alert-danger" role="alert">' . $error . '</div>';
+        }
+    } elseif (!empty($_POST)) {
+        echo '<div class="alert alert-success" role="alert">Order Sent!</div>';
+    }
+}
+function checkRequired(array $post): array
+{
+    $errors = [];
+    if (empty($_POST)) {
+        return $errors;
+    } else {
+        if (empty($_POST["email"])) {
+            $errors[] = "Email is required";
+        } else {
+            // check if e-mail address is well-formed
+            if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Invalid email format";
+            }
+        }
+        if (empty($post["street"])) {
+            $errors[] = "Street is required";
+        }
+        if (empty($post["streetnumber"])) {
+            $errors[] = "Streetnumber is required";
+        } else {
+            // check if streetnumber is a number
+            if (!is_numeric($_POST["streetnumber"])) {
+                $errors[] = "Streetnumber should be a number";
+            }
+        }
+        if (empty($_POST["city"])) {
+            $errors[] = "City is required";
+        }
+        if (empty($_POST["zipcode"])) {
+            $errors[] = "Zipcode is required";
+        } else {
+            // check if streetnumber is a number
+            if (!is_numeric($_POST["zipcode"])) {
+                $errors[] = "Zipcode should be a number";
+            }
+        }
+        if (empty($_POST["products"])){
+            $errors[] = "Please select an item";
+        }
+    }
+    return $errors;
+}
+
+
+$street = $streetnumber = $city = $zipcode = $email = "";
+if (!empty($_POST)) {
+    $email = $_POST["email"];
+    $_SESSION["street"] = $_POST["street"];
+    $_SESSION["streetnumber"] = $_POST["streetnumber"];
+    $_SESSION["city"] = $_POST["city"];
+    $_SESSION["zipcode"] = $_POST["zipcode"];
+}
+if (!empty($_SESSION["street"])) {
+    $street = $_SESSION["street"];
+}
+if (!empty($_SESSION["streetnumber"])) {
+    $streetnumber = $_SESSION["streetnumber"];
+}
+if (!empty($_SESSION["city"])) {
+    $city = $_SESSION["city"];
+}
+if (!empty($_SESSION["zipcode"])) {
+    $zipcode = $_SESSION["zipcode"];
+}
 $totalValue = 0;
 require 'form-view.php';
+whatIsHappening();
