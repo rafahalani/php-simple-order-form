@@ -11,14 +11,14 @@
 </head>
 <body>
 <?php
-$errors = checkRequired($_POST);
-errorPrint($errors);
+$errors = checkRequired($_POST); //first  take all the errors after validate the inputs
+errorPrint($errors); // apply error function on the errors
 if (!empty($_POST["products"])) {
-    $new_sum = array_sum($_POST["products"]);
+    $new_sum = array_sum($_POST["products"]); //add the value of the products (sum)
 } else {
     $new_sum = 0;
 }
-if (empty($errors)){
+if (empty($errors)) { //if there is no errors then you can count
     $cookie_name = "total";
     $baseValue = 0;
     if (isset($_COOKIE[$cookie_name])) {
@@ -63,11 +63,12 @@ if (empty($errors)){
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control"  value="<?php echo $street ?>">
+                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $street ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php echo $streetnumber ?>">
+                    <input type="text" id="streetnumber" name="streetnumber" class="form-control"
+                           value="<?php echo $streetnumber ?>">
                 </div>
             </div>
             <div class="form-row">
@@ -77,7 +78,7 @@ if (empty($errors)){
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
-                    <input type="text" id="zipcode" name="zipcode" class="form-control"  value="<?php echo $zipcode ?>">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php echo $zipcode ?>">
                 </div>
             </div>
         </fieldset>
