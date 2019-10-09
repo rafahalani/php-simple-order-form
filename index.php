@@ -17,19 +17,8 @@ function whatIsHappening() {
     var_dump($_SESSION);
 }
 //your products with their price.
-$products = [
-    ['name' => 'Club Ham', 'price' => 3.20],
-    ['name' => 'Club Cheese', 'price' => 3],
-    ['name' => 'Club Cheese & Ham', 'price' => 4],
-    ['name' => 'Club Chicken', 'price' => 4],
-    ['name' => 'Club Salmon', 'price' => 5]
-];
-$products = [
-    ['name' => 'Cola', 'price' => 2],
-    ['name' => 'Fanta', 'price' => 2],
-    ['name' => 'Sprite', 'price' => 2],
-    ['name' => 'Ice-tea', 'price' => 3],
-];
+
+
 
 
 function errorPrint($errors)
@@ -109,5 +98,32 @@ if (!empty($_SESSION["zipcode"])) {
     $zipcode = $_SESSION["zipcode"];
 }
 $totalValue = 0;
+
+if(($_GET['food'])==null || ($_GET['food'])==1){
+
+    $products = [
+        ['name' => 'Club Ham', 'price' => 3.20],
+        ['name' => 'Club Cheese', 'price' => 3],
+        ['name' => 'Club Cheese & Ham', 'price' => 4],
+        ['name' => 'Club Chicken', 'price' => 4],
+        ['name' => 'Club Salmon', 'price' => 5]
+    ];
+
+}
+elseif ($_GET['food']== 0){
+    $products = [
+        ['name' => 'Cola', 'price' => 2],
+        ['name' => 'Fanta', 'price' => 2],
+        ['name' => 'Sprite', 'price' => 2],
+        ['name' => 'Ice-tea', 'price' => 3],
+    ];
+
+}
+
+
+$dilivery = [
+    ['name' => '2 hours', 'price'=> 2],
+    ['name'=> '45 min','price'=> 5]
+    ];
 require 'form-view.php';
 whatIsHappening();

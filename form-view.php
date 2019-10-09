@@ -12,27 +12,32 @@
 <body>
 <?php
 $errors =checkValidation($_POST); //first  take all the errors after validate the inputs
-errorPrint($errors); // apply error function on the errors
+errorPrint($errors); // apply error function on the errors (get all the errors)
+
 if (!empty($_POST["products"])) {
-    $new_sum = array_sum($_POST["products"]); //add the value of the products (sum)
+    $new_sum = array_sum($_POST["products"]["price"]); //add the value of the products (sum)
 } else {
     $new_sum = 0;
 }
 if (empty($errors)) { //if there is no errors then you can count
-    $cookie_name = "total";
+
     $baseValue = 0;
-    if (isset($_COOKIE[$cookie_name])) {
+    $cookie_name = 0 ;
+    if (isset($_COOKIE["total"])) {
+
         $cookie_value = $_COOKIE[$cookie_name];
-    } else {
+         }
+    else {
         $cookie_value = 0;
-    }
-    $cookie_value += $baseValue + $new_sum;//adding the new sum (bug)
+        }
+    $cookie_value += $baseValue + $new_sum;
     setcookie($cookie_name, (string)$cookie_value);
     if (isset($_COOKIE[$cookie_name])) {
         $totalValue = $_COOKIE[$cookie_name];
     } else {
         $totalValue = 0;
     }
+
 }
 ?>
 <div class="container">
@@ -96,9 +101,17 @@ if (empty($errors)) { //if there is no errors then you can count
                     &euro; <?php echo number_format($product['price'], 2) ?></label><br/>
             <?php endforeach; ?>
         </fieldset>
+        <fieldset>
+            <legend>Express Dilivery </legend>
+            <label>
+                <input type="checkbox" value="1" name="dilivery"/>
+               <p> + 7  &euro; </p>
+            </label>
+        </fieldset>
 
         <button type="submit" class="btn btn-primary">Order!</button>
     </form>
+
 
     <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
 </div>
