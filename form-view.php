@@ -85,7 +85,11 @@ if (empty($errors)) { //if there is no errors then you can count
 
         <fieldset>
             <legend>Products</legend>
-            <?php foreach ($products AS $i => $product): ?>
+            <?php
+            var_dump($_GET["food"]);
+
+
+            foreach ($products AS $i => $product): ?>
                 <label>
                     <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $product['name'] ?>
                     -

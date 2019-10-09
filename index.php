@@ -90,8 +90,8 @@ function checkValidation(array $post): array
 
 $street = $streetnumber = $city = $zipcode = $email = "";
 if (!empty($_POST)) {
-    $email = $_POST["email"];
-    $_SESSION["street"] = $_POST["street"];
+    $email = $_POST["email"]; //  the email in $_POST it will not be saved in the browser
+    $_SESSION["street"] = $_POST["street"]; // asign every $_POST to $_SESSION saves the value to the next browser
     $_SESSION["streetnumber"] = $_POST["streetnumber"];
     $_SESSION["city"] = $_POST["city"];
     $_SESSION["zipcode"] = $_POST["zipcode"];
