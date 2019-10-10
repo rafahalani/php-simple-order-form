@@ -102,10 +102,11 @@ if (empty($errors)) { //if there is no errors then you can count
             <?php endforeach; ?>
         </fieldset>
         <fieldset>
-            <legend>Express Dilivery </legend>
+            <legend> </legend>
             <label>
-                <input type="checkbox" value="1" name="dilivery"/>
-               <p> + 7  &euro; </p>
+                <input type="checkbox" value="1" name="dilivery" />
+                Express Dilivery (+ &euro;  7)?
+
             </label>
         </fieldset>
 
@@ -113,7 +114,7 @@ if (empty($errors)) { //if there is no errors then you can count
     </form>
 
 
-    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+    <footer>You have  <strong>&euro; <?php echo $totalValue ?></strong> of food and drinks in your cart.</footer>
 </div>
 
 <style>
